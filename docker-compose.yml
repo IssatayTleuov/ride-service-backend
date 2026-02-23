@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    image: 'ride-service-backend:latest'
+    build:
+      context: .
+    container_name: ride-service-backend
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=rider
+      - POSTGRES_PASSWORD=Qwerty1234&
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/ride_service_db
+      - SPRING_DATASOURCE_USERNAME=rider
+      - SPRING_DATASOURCE_PASSWORD=Qwerty1234&
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      - POSTGRES_USER=rider
+      - POSTGRES_PASSWORD=Qwerty1234&
+      - POSTGRES_DB=ride_service_db
+    ports:
+      - "5432:5432"
